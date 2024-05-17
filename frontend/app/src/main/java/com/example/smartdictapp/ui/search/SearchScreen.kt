@@ -22,14 +22,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.smartdictapp.ui.home.DictEvent
+import com.example.smartdictapp.ui.home.DictViewModel
+import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchScreen(viewModel: SearchViewModel = SearchViewModel()) {
-    val uiState by viewModel.uiState.collectAsState()
+fun SearchScreen(
+    navController: NavHostController,
+    inputText: String,
+    outputLanguage: String,
+    onEvent: (DictEvent) -> Unit
+) {
+//    val uiState by viewModel.uiState.collectAsState()
     var expanded by remember { mutableStateOf(false) }
     val options = listOf("English", "Vietnamese")
+    val focusManager = LocalFocusManager.current
 
     Scaffold(topBar = {
         Row(
@@ -38,10 +49,6 @@ fun SearchScreen(viewModel: SearchViewModel = SearchViewModel()) {
                 .background(MaterialTheme.colorScheme.primaryContainer),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-//            TopAppBar(
-//                title = { Text("SmartDict") },
-//                colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
-//            )
             Text(
                 "SmartDict",
                 style = MaterialTheme.typography.titleLarge,
@@ -53,7 +60,7 @@ fun SearchScreen(viewModel: SearchViewModel = SearchViewModel()) {
                 expanded = expanded,
                 onExpandedChange = { expanded = !expanded }) {
                 TextField(
-                    value = uiState.outputLanguage,
+                    value = outputLanguage,
                     onValueChange = { },
                     readOnly = true,
                     trailingIcon = {
@@ -69,7 +76,7 @@ fun SearchScreen(viewModel: SearchViewModel = SearchViewModel()) {
                 ExposedDropdownMenu(expanded = expanded, onDismissRequest = { expanded = false }) {
                     options.forEach { text ->
                         DropdownMenuItem(onClick = {
-                            viewModel.onEvent(SearchEvent.SetOutputLanguage(text))
+                            onEvent(DictEvent.SetOutputLanguage(text))
                             expanded = false
                         }, text = { Text(text) })
                     }
@@ -87,23 +94,22 @@ fun SearchScreen(viewModel: SearchViewModel = SearchViewModel()) {
                 end = 16.dp
             )
         ) {
-            if (!uiState.lookupMode) {
-                // Input text field
-                TextField(
-                    value = uiState.inputText,
-                    onValueChange = { viewModel.onEvent(SearchEvent.SetInputText(it)) },
-                    label = { Text("Enter a word") },
-                    modifier = Modifier.fillMaxWidth(),
-                    singleLine = true,
-                    keyboardActions = KeyboardActions(
-                        onDone = { viewModel.onEvent(SearchEvent.Lookup) }
-                    )
-                )
-            }
-            else {
 
-            }
-
+            // Input text field
+            TextField(value = inputText,
+                onValueChange = { onEvent(DictEvent.SetInputText(it)) },
+                label = { Text("Enter a word") },
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                keyboardActions = KeyboardActions(onDone = {
+                    if (inputText.isNotEmpty()) {
+                        // Hide keyboards
+                        focusManager.clearFocus()
+                        navController.navigate("result")
+                    }
+                })
+            )
         }
+
     }
 }
