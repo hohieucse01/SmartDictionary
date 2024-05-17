@@ -1,4 +1,4 @@
-package com.example.smartdictapp.ui.home
+package com.example.smartdictapp.ui.search
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,25 +6,25 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-class HomeViewModel() : ViewModel() {
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState : StateFlow<HomeUiState> = _uiState.asStateFlow()
+class SearchViewModel() : ViewModel() {
+    private val _uiState = MutableStateFlow(SearchUiState())
+    val uiState : StateFlow<SearchUiState> = _uiState.asStateFlow()
 
-    fun onEvent(homeEvent: HomeEvent) {
-        when(homeEvent) {
-            is HomeEvent.SetInputText -> {
+    fun onEvent(searchEvent: SearchEvent) {
+        when(searchEvent) {
+            is SearchEvent.SetInputText -> {
                 _uiState.update { currentState ->
                     currentState.copy(
-                        inputText = homeEvent.text
+                        inputText = searchEvent.text
                     )}
             }
-            is HomeEvent.SetOutputLanguage -> {
+            is SearchEvent.SetOutputLanguage -> {
                 _uiState.update { currentState ->
                     currentState.copy(
-                        outputLanguage = homeEvent.language
+                        outputLanguage = searchEvent.language
                     )}
             }
-            is HomeEvent.Lookup -> {
+            is SearchEvent.Lookup -> {
                 _uiState.update { currentState ->
                     currentState.copy(
                         lookupMode = true
