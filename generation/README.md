@@ -63,3 +63,19 @@ You need to provide the output in JSON format:
 - **Synonyms**: [List of Synonyms]
 - **Antonyms**: [List of Antonyms]
 ```
+
+### Prompt for Generating the Image related to the Input Word
+```bash
+Generate an image to aid users in learning and memorizing the provided Korean vocabulary word. The image should be educational, engaging, and contextually relevant. Please follow thesse instructions:
+
+1. Visual Style:
+- Use clear, vibrant, and engaging imagery.
+- Ensure the image is contextually relevant to the word and its usage.
+
+2. Background and Context:
+- Add a simple, relevant background to enhance understanding of the word (e.g., an orchard for an apple, a classroom for a study-related word).
+
+3. Educational Focus:
+- Make the image intuitive and helpful for memorization.
+-Use visual elements that make the word and its usage easy to remember.
+```
