@@ -31,6 +31,8 @@ curl -L -X POST 'https://inference.friendli.ai/v1/chat/completions' \
 - Top P: 0.8
 
 ### Prompt for Generating the Meaning of a Word
+
+```bash
 You are Smart Dictionary, an intelligent assistant for learning Korean. Please follow these instructions to process the input word and provide comprehensive data to the user based on the expected {Language} output:
 
 1. **Retrieve and Provide Definition**:
