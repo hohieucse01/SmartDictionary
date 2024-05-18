@@ -1,9 +1,11 @@
 # Generation Endpoints
+
 This is a list of all the endpoints that are related to the generation of data.
 
-## Prompt Engineering
+## Text Generation
 
-### cURL Request
+### cURL Request for Generating Text
+
 ```bash
 curl -L -X POST 'https://inference.friendli.ai/v1/chat/completions' \
 -H 'Content-Type: application/json' \
@@ -26,6 +28,7 @@ curl -L -X POST 'https://inference.friendli.ai/v1/chat/completions' \
 ```
 
 ### Parameter:
+
 - Token Length: 4096
 - Temperature: 1
 - Top P: 0.8
@@ -64,7 +67,10 @@ You need to provide the output in JSON format:
 - **Antonyms**: [List of Antonyms]
 ```
 
+## Image Generation
+
 ### Prompt for Generating the Image related to the Input Word
+
 ```bash
 Generate an image to aid users in learning and memorizing the provided Korean vocabulary word. The image should be educational, engaging, and contextually relevant. Please follow thesse instructions:
 
@@ -73,9 +79,37 @@ Generate an image to aid users in learning and memorizing the provided Korean vo
 - Ensure the image is contextually relevant to the word and its usage.
 
 2. Background and Context:
-- Add a simple, relevant background to enhance understanding of the word (e.g., an orchard for an apple, a classroom for a study-related word).
+- Add a simple, relevant background to enhance understanding of the word.
 
 3. Educational Focus:
 - Make the image intuitive and helpful for memorization.
--Use visual elements that make the word and its usage easy to remember.
+- Use visual elements that make the word and its usage easy to remember.
+```
+
+### cURL Request for Generating Image using Dall-e-3
+
+```bash
+curl https://api.openai.com/v1/images/generations \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d '{
+    "model": "dall-e-3",
+    "prompt": "a white siamese cat",
+    "n": 1,
+    "size": "1024x1024"
+  }'
+```
+
+### cURL Request for Generating Image using
+
+```
+curl -L -X POST 'https://inference.friendli.ai/v1/text-to-image' \
+-H 'Content-Type: multipart/form-data' \
+-H 'Accept: application/json' \
+-H 'Authorization: Bearer flp_eBOsoO7oM0iaZZYW9skCpW6ZuiKcLtZVdyWIsaYyu94c7a' \
+-F 'prompt="prompt=\"Generate an image to aid users in learning and memorizing the provided Korean vocabulary word. The image should be educational, engaging, and contextually relevant. Please follow thesse instructions:  1. Visual Style: - Use clear, vibrant, and engaging imagery. - Ensure the image is contextually relevant to the word and its usage.  2. Background and Context: - Add a simple, relevant background to enhance understanding of the word.  3. Educational Focus: - Make the image intuitive and helpful for memorization. - Use visual elements that make the word and its usage easy to remember."' \
+-F 'model="stable-diffusion-v1-5"' \
+-F 'num_outputs="2"' \
+-F 'num_inference_steps="50"' \
+-F 'guidance_scale="7.5"'
 ```
