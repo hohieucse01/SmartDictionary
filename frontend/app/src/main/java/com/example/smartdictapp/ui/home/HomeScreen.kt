@@ -15,7 +15,6 @@ fun HomeScreen(viewModel: DictViewModel = DictViewModel()) {
     val navController = rememberNavController()
     val uiState by viewModel.uiState.collectAsState()
 
-
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
             SearchScreen(
