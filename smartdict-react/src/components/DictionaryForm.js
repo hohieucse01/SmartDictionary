@@ -1,5 +1,6 @@
 // src/components/DictionaryForm.js
 import React, { useState } from "react";
+import { TextField, Button, Box } from "@mui/material";
 
 const DictionaryForm = ({ onSearch }) => {
   const [word, setWord] = useState("");
@@ -12,15 +13,18 @@ const DictionaryForm = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
+    <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <TextField
+        variant="outlined"
+        fullWidth
+        label="Enter a word"
         value={word}
         onChange={(e) => setWord(e.target.value)}
-        placeholder="Enter a word"
       />
-      <button type="submit">Search</button>
-    </form>
+      <Button type="submit" variant="contained" color="primary" fullWidth>
+        Search
+      </Button>
+    </Box>
   );
 };
 

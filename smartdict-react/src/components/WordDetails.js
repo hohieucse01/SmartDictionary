@@ -1,6 +1,7 @@
 // src/components/WordDetails.js
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { Paper, Box, Typography } from "@mui/material";
 
 const WordDetails = ({ details }) => {
   if (!details) {
@@ -8,9 +9,11 @@ const WordDetails = ({ details }) => {
   }
 
   return (
-    <div>
-      <ReactMarkdown>{details.markdownContent}</ReactMarkdown>
-    </div>
+    <Paper elevation={3} sx={{ padding: 2 }}>
+      <ReactMarkdown>
+        {details.markdownContent}
+      </ReactMarkdown>
+    </Paper>
   );
 };
 
