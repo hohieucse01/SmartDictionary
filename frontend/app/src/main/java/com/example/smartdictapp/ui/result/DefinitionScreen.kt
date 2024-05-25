@@ -30,8 +30,6 @@ fun DefinitionScreen(
     inputText: String,
     onEvent: (DictEvent) -> Unit
 ) {
-    var imageExpanded by remember { mutableStateOf(false) }
-
     Box(
         modifier = Modifier
             .fillMaxWidth()

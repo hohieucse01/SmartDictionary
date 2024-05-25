@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import com.example.smartdictapp.utils.NetworkImage
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,7 +62,10 @@ fun PhotoCard() {
             }
 
             if (expanded) {
-
+                NetworkImage(
+                    url = "https://source.unsplash.com/random/800x600",
+                    modifier = Modifier.fillMaxWidth()
+                )
             }
         }
     }
