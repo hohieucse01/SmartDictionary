@@ -52,7 +52,7 @@ const App = () => {
                 
                 2. **Generate Usage in a Sentence (5 sentences) MUST BE A KOREAN SENTENCE with GRAMMATICALLY CORRECTLY and the sentences must consists of KOREAN word only**:
                   - Provide the English translation of each sentence.
-                  - Ensure the generated sentences are not having other language words.
+                  - Ensure the generated sentences does not contait any other language other than Korean.
 
                 3. **Find and Provide Synonyms**:
                   - Use a thesaurus or language model to identify synonyms for the word.
