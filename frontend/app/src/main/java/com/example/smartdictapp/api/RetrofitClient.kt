@@ -1,14 +1,13 @@
-package com.example.smartdictapp.api
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
-    val api : ServiceApi by lazy {
+object RetrofitClient {
+    private const val BASE_URL = "https://inference.friendli.ai/"
+
+    val instance: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
+            .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ServiceApi::class.java)
     }
 }
