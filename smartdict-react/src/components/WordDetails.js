@@ -1,7 +1,7 @@
-// src/components/WordDetails.js
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Paper, Box, Typography } from "@mui/material";
+import './WordDetails.css'; // Import the CSS file
 
 const WordDetails = ({ details }) => {
   if (!details) {
@@ -11,7 +11,7 @@ const WordDetails = ({ details }) => {
   return (
     <Paper elevation={3} sx={{ padding: 2 }}>
       <ReactMarkdown>
-        {details.markdownContent}
+        {details.markdownContent.replace('## Vocabulary by image', '## Visual Vocabulary')}
       </ReactMarkdown>
     </Paper>
   );

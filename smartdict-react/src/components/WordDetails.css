@@ -1,0 +1,11 @@
+img {
+  display: block;
+  margin: 20px auto;
+  /* Centers the image */
+  width: 50%;
+  /* Crops 2% from the width */
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  /* Ensures the image maintains aspect ratio */
+}

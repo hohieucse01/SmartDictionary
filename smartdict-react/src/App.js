@@ -27,6 +27,9 @@ const App = () => {
     palette: {
       mode: darkMode ? 'dark' : 'light',
     },
+    typography: {
+      fontFamily: 'Roboto, sans-serif',
+    },
   });
 
   const handleThemeChange = () => {
@@ -45,14 +48,14 @@ const App = () => {
           messages: [
             {
               role: "system",
-              content: `You are a high intelligent assistant that helps user learning Korean. Please follow these instructions to process the input word and provide sentences and explanation to user based on the expected English output. Each section should be clearly separated by new line and formatted. The output should be in markdown format.
+              content: `You are a highly intelligent assistant that helps users learn Korean. Please follow these instructions to process the input word and provide sentences and explanations to the user based on the expected English output. Each section should be clearly separated by a new line and formatted. The output should be in markdown format.
                 1. **Retrieve and Provide Definition**:
                   - Use a reliable Korean-English dictionary to explain the definition of the word.
                   - Provide the definition in English.
                 
                 2. **Generate Usage in a Sentence (5 sentences) MUST BE A KOREAN SENTENCE with GRAMMATICALLY CORRECTLY and the sentences must consists of KOREAN word only**:
                   - Provide the English translation of each sentence.
-                  - Ensure the generated sentences does not contait any other language other than Korean.
+                  - Ensure the generated sentences do not contain any other language other than Korean.
 
                 3. **Find and Provide Synonyms**:
                   - Use a thesaurus or language model to identify synonyms for the word.
@@ -196,7 +199,7 @@ const App = () => {
               </IconButton>
             </Tooltip>
           </Box>
-          <Paper elevation={3} sx={{ padding: 2, width: "100%", marginTop: 2 }}>
+          <Paper elevation={3} sx={{ padding: 3, width: "100%", marginTop: 2 }}>
             <DictionaryForm onSearch={fetchWordDetails} />
           </Paper>
           {loading && (
