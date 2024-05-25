@@ -1,5 +1,6 @@
 package com.example.smartdictapp.ui.result
 
+import android.graphics.Paint.Align
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -27,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
@@ -105,21 +107,18 @@ fun ResultScreen(
             HorizontalPager(
                 state = pagerState, modifier = Modifier
                     .fillMaxWidth()
-                    .weight(1f)
+                    .weight(1f),
+                verticalAlignment = Alignment.Top
             ) { index ->
                 when (index) {
                     0 -> {
                         DefinitionScreen(
                             inputText = inputText, onEvent = onEvent
                         )
-//                        Text("Definition")
                     }
 
                     1 -> {
-                        ExampleScreen(
-                        )
-//                        Text("Example")
-
+                        ExampleScreen()
                     }
                 }
             }
