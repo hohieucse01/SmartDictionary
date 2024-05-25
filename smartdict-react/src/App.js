@@ -52,6 +52,7 @@ const App = () => {
                 
                 2. **Generate Usage in a Sentence (5 sentences) MUST BE A KOREAN SENTENCE with GRAMMATICALLY CORRECTLY and the sentences must consists of KOREAN word only**:
                   - Provide the English translation of each sentence.
+                  - Ensure the generated sentences are not having other language words.
 
                 3. **Find and Provide Synonyms**:
                   - Use a thesaurus or language model to identify synonyms for the word.
@@ -128,7 +129,7 @@ const App = () => {
       formData.append("model", "stable-diffusion-v1-5");
       formData.append(
         "negative_prompt",
-        "worst quality, normal quality, low quality, low res, blurry, text, watermark, logo, banner, extra digits, cropped, jpeg artifacts, signature, username, error, sketch, duplicate, ugly, monochrome, horror, geometry, mutation, disgusting, human image, human face"
+        "worst quality, normal quality, low quality, low res, blurry, text, watermark, logo, banner, extra digits, cropped, jpeg artifacts, signature, username, error, sketch, duplicate, ugly, monochrome, horror, geometry, mutation, disgusting"
       );
       formData.append("num_outputs", "1");
       formData.append("num_inference_steps", "70");
