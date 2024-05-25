@@ -8,7 +8,12 @@ import {
   CssBaseline,
   CircularProgress,
   Alert,
+  IconButton,
+  Tooltip,
 } from "@mui/material";
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import DictionaryForm from "./components/DictionaryForm";
 import WordDetails from "./components/WordDetails";
 
@@ -16,6 +21,17 @@ const App = () => {
   const [wordDetails, setWordDetails] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const theme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+    },
+  });
+
+  const handleThemeChange = () => {
+    setDarkMode(!darkMode);
+  };
 
   const fetchWordDetails = async (word) => {
     setLoading(true);
@@ -34,7 +50,7 @@ const App = () => {
                   - Use a reliable Korean-English dictionary to explain the definition of the word.
                   - Provide the definition in English.
                 
-                2. **Generate Usage in a Sentence (5 sentences) MUST GRAMMATICALLY CORRECT KOREAN SENTENCES and the sentences must consists of KOREAN word only**:
+                2. **Generate Usage in a Sentence (5 sentences) MUST BE A KOREAN SENTENCE with GRAMMATICALLY CORRECTLY and the sentences must consists of KOREAN word only**:
                   - Provide the English translation of each sentence.
 
                 3. **Find and Provide Synonyms**:
@@ -151,39 +167,55 @@ const App = () => {
   };
 
   return (
-    <Container component="main" maxWidth="md">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography component="h1" variant="h4" gutterBottom>
-          Smart Dictionary
-        </Typography>
-        <Paper elevation={3} sx={{ padding: 2, width: "100%", marginTop: 2 }}>
-          <DictionaryForm onSearch={fetchWordDetails} />
-        </Paper>
-        {loading && (
-          <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
-            <CircularProgress />
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="md">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+              alignItems: "center",
+            }}
+          >
+            <Typography component="h1" variant="h4" gutterBottom>
+              Smart Dictionary
+            </Typography>
+            <Tooltip title="Toggle dark mode">
+              <IconButton onClick={handleThemeChange} color="inherit">
+                {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
+              </IconButton>
+            </Tooltip>
           </Box>
-        )}
-        {error && (
-          <Box sx={{ marginTop: 4, width: "100%" }}>
-            <Alert severity="error">{error}</Alert>
-          </Box>
-        )}
-        {wordDetails && (
-          <Box sx={{ marginTop: 4, width: "100%" }}>
-            <WordDetails details={wordDetails} />
-          </Box>
-        )}
-      </Box>
-    </Container>
+          <Paper elevation={3} sx={{ padding: 2, width: "100%", marginTop: 2 }}>
+            <DictionaryForm onSearch={fetchWordDetails} />
+          </Paper>
+          {loading && (
+            <Box sx={{ display: "flex", justifyContent: "center", marginTop: 4 }}>
+              <CircularProgress />
+            </Box>
+          )}
+          {error && (
+            <Box sx={{ marginTop: 4, width: "100%" }}>
+              <Alert severity="error">{error}</Alert>
+            </Box>
+          )}
+          {wordDetails && (
+            <Box sx={{ marginTop: 4, width: "100%" }}>
+              <WordDetails details={wordDetails} />
+            </Box>
+          )}
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 };
 
