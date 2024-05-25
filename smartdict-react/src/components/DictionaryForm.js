@@ -1,8 +1,8 @@
 // src/components/DictionaryForm.js
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const DictionaryForm = ({ onSearch }) => {
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();

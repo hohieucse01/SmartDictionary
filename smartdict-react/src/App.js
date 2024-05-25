@@ -9,6 +9,7 @@ const App = () => {
 
   const fetchWordDetails = async (word) => {
     try {
+      // Fetch text details
       const textResponse = await axios.post(
         "https://inference.friendli.ai/v1/chat/completions",
         {
@@ -16,12 +17,12 @@ const App = () => {
           messages: [
             {
               role: "system",
-              content: `You are an high intelligent assistant for learning Korean. Please follow these instructions to process the input word and provide comprehensive data to the user based on the expected English output:
+              content: `You are a high intelligent assistant for learning Korean. Please follow these instructions to process the input word and provide comprehensive data to the user based on the expected English output. Each section should be clearly separated and formatted. The output should be in markdown format.
                 1. **Retrieve and Provide Definition**:
                   - Use a reliable Korean-English dictionary to explain the definition of the word.
                   - Provide the definition in English.
                 2. **Generate Usage in a Sentence (3 sentences)**:
-                  - Ensure a grammatically correct Korean sentence using the word. Sentences should be simple and easy to understand consisting Korean words only.
+                  - Ensure a grammatically correct Korean sentence using the word. Sentences should be simple and easy to understand must consisting of Korean words only.
                   - Provide the English translation of the sentence.
                 3. **Find and Provide Synonyms**:
                   - Use a thesaurus or language model to identify synonyms for the word.
@@ -60,16 +61,16 @@ const App = () => {
       const content = textResponse.data.choices[0].message.content;
       console.log("Content:", content);
 
+      // Generate image
       const formData = new FormData();
-      formData.append("prompt", word);
-      formData.append(
-        "negative_prompt",
-        "worst quality, normal quality, low quality, low res, blurry, text, watermark, logo, banner, extra digits, cropped, jpeg artifacts, signature, username, error, sketch, duplicate, ugly, monochrome, horror, geometry, mutation, disgusting, human face"
-      );
+      formData.append("prompt", `${word}`);
       formData.append("model", "stable-diffusion-v1-5");
-      formData.append("num_outputs", "2");
-      formData.append("num_inference_steps", "60");
+      formData.append("negative_prompt", "worst quality, normal quality, low quality, low res, blurry, text, watermark, logo, banner, extra digits, cropped, jpeg artifacts, signature, username, error, sketch, duplicate, ugly, monochrome, horror, geometry, mutation, disgusting, human image, human face");
+      formData.append("num_outputs", "1");
+      formData.append("num_inference_steps", "100");
       formData.append("guidance_scale", "7.5");
+
+      console.log ("Form Data:", formData);
 
       const imageResponse = await axios.post(
         "https://inference.friendli.ai/v1/text-to-image",
@@ -84,10 +85,10 @@ const App = () => {
         }
       );
 
-      const imageUrl =
-        imageResponse.data.length > 0 ? imageResponse.data[0].url : "";
+      const imageUrls = imageResponse.data.data.map(img => img.url).join("\n");
+      const contentWithImage = `${content}\n\n## Vocabulary by image \n${imageUrls.split("\n").map(url => `![Generated Image](${url})`).join("\n")}`;
 
-      setWordDetails({ markdownContent: content, imageUrl });
+      setWordDetails({ markdownContent: contentWithImage });
     } catch (error) {
       console.error("Error fetching word details:", error);
     }
@@ -95,7 +96,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1>SmartDict</h1>
+      <h1>Smart Dictionary</h1>
       <DictionaryForm onSearch={fetchWordDetails} />
       <WordDetails details={wordDetails} />
     </div>
