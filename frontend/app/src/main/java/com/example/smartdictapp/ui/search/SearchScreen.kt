@@ -16,7 +16,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,8 +25,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.smartdictapp.ui.home.DictEvent
-import com.example.smartdictapp.ui.home.DictViewModel
-import kotlinx.coroutines.runBlocking
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -56,10 +53,9 @@ fun SearchScreen(
             )
 
             // Output text selection
-            ExposedDropdownMenuBox(
-                expanded = expanded,
+            ExposedDropdownMenuBox(expanded = expanded,
                 onExpandedChange = { expanded = !expanded }) {
-                TextField(
+                TextField(label = { Text("Output language") },
                     value = outputLanguage,
                     onValueChange = { },
                     readOnly = true,
