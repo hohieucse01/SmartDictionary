@@ -6,7 +6,7 @@ This is a list of all the endpoints that are related to the generation of data.
 
 ### cURL Request for Generating Text
 
-```bash
+````bash
 curl -L -X POST 'https://inference.friendli.ai/v1/chat/completions' \
 -H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
@@ -27,9 +27,28 @@ curl -L -X POST 'https://inference.friendli.ai/v1/chat/completions' \
 }'
 
 choices.message.content
-{"choices":[{"finish_reason":"stop","index":0,"logprobs":null,"message":{"content":"Here is the comprehensive data for the Korean word \"대학\":\n\n**Output**\n\n```\n{\n  \"Word\": \"대학\",\n  \"Definition\": \"A school that provides higher education, especially one that is attended after completing high school.\",\n  \"Usage in a Sentence\": {\n    \"Korean\": \"저는 고려대학교에 다녔습니다.\",\n    \"English\": \"I attended Korea University.\"\n  },\n  \"Synonyms\": [\n    {\n      \"Word\": \"대학교\",\n      \"Definition\": \"A university or institution of higher education.\"\n    },\n    {\n      \"Word\": \"학원\",\n      \"Definition\": \"An institution of higher education, especially a private one.\"\n    }\n  ],\n  \"Antonyms\": [\n    {\n      \"Word\": \"초등학교\",\n      \"Definition\": \"An elementary school or primary school.\"\n    },\n    {\n      \"Word\": \"중학교\",\n      \"Definition\": \"A middle school or secondary school.\"\n    }\n  ]\n}\n```\n\nLet me know if you have any further requests!","role":"assistant"}}],"created":1716604779,"usage":{"completion_tokens":212,"prompt_tokens":299,"total_tokens":511}}
 
-```
+{
+   "choices":[
+      {
+         "finish_reason":"stop",
+         "index":0,
+         "logprobs":null,
+         "message":{
+            "content":"Here is the comprehensive data for the Korean word \"대학\":\n\n**Output**\n\n```\n{\n  \"Word\": \"대학\",\n  \"Definition\": \"A school that provides higher education, especially one that is attended after completing high school.\",\n  \"Usage in a Sentence\": {\n    \"Korean\": \"저는 고려대학교에 다녔습니다.\",\n    \"English\": \"I attended Korea University.\"\n  },\n  \"Synonyms\": [\n    {\n      \"Word\": \"대학교\",\n      \"Definition\": \"A university or institution of higher education.\"\n    },\n    {\n      \"Word\": \"학원\",\n      \"Definition\": \"An institution of higher education, especially a private one.\"\n    }\n  ],\n  \"Antonyms\": [\n    {\n      \"Word\": \"초등학교\",\n      \"Definition\": \"An elementary school or primary school.\"\n    },\n    {\n      \"Word\": \"중학교\",\n      \"Definition\": \"A middle school or secondary school.\"\n    }\n  ]\n}\n```\n\nLet me know if you have any further requests!",
+            "role":"assistant"
+         }
+      }
+   ],
+   "created":1716604779,
+   "usage":{
+      "completion_tokens":212,
+      "prompt_tokens":299,
+      "total_tokens":511
+   }
+}
+
+````
 
 ### Parameter:
 
