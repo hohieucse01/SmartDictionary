@@ -107,9 +107,10 @@ curl -L -X POST 'https://inference.friendli.ai/v1/text-to-image' \
 -H 'Content-Type: multipart/form-data' \
 -H 'Accept: application/json' \
 -H 'Authorization: Bearer flp_eBOsoO7oM0iaZZYW9skCpW6ZuiKcLtZVdyWIsaYyu94c7a' \
--F 'prompt="prompt=\"Generate an image to aid users in learning and memorizing the provided Korean vocabulary word. The image should be educational, engaging, and contextually relevant. Please follow thesse instructions:  1. Visual Style: - Use clear, vibrant, and engaging imagery. - Ensure the image is contextually relevant to the word and its usage.  2. Background and Context: - Add a simple, relevant background to enhance understanding of the word.  3. Educational Focus: - Make the image intuitive and helpful for memorization. - Use visual elements that make the word and its usage easy to remember."' \
+-F 'prompt="{keyword}"' \
+-F 'negative_prompt="worst quality, normal quality, low quality, low res, blurry, text, watermark, logo, banner, extra digits, cropped, jpeg artifacts, signature, username, error, sketch, duplicate, ugly, monochrome, horror, geometry, mutation, disgusting, human face"' \
 -F 'model="stable-diffusion-v1-5"' \
 -F 'num_outputs="2"' \
--F 'num_inference_steps="50"' \
+-F 'num_inference_steps="60"' \
 -F 'guidance_scale="7.5"'
 ```
